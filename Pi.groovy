@@ -34,7 +34,7 @@ pipeline{
             parallel{
                 stage('Client'){
                     steps{
-                        sleep(time:5, units:"SECONDS")
+                        sleep(time:5, unit:"SECONDS")
                         sh 'java -jar target/PiClient-*.jar'
                     }
                 }
