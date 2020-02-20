@@ -5,13 +5,13 @@ pipeline{
             parallel{
                 stage('Client'){
                     steps{
-                        build job 'Pi_Client_SCM'
+                        build job:'Pi_Client_SCM'
                     }
                 }
 
                 stage('Server'){
                     steps{
-                        build job 'Pi_Server_SCM'
+                        build job:'Pi_Server_SCM'
                     }
                 }
             }
@@ -34,7 +34,7 @@ pipeline{
             parallel{
                 stage('Client'){
                     steps{
-                        sleep(time:5, untis:"SECONDS")
+                        sleep(time:5, units:"SECONDS")
                         sh 'java -jar target/PiClient-*.jar'
                     }
                 }
@@ -48,7 +48,9 @@ pipeline{
         }
 
         stage('Arch: Archiving Artifacts'){
-            archiveArtifacts artifacts:'**/target/Pi*-*.jar', fingerprint:true
+            steps{
+                archiveArtifacts artifacts:'**/target/Pi*-*.jar', fingerprint:true
+            }
         }
     }
 }
