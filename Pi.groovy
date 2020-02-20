@@ -18,14 +18,16 @@ pipeline{
         }
 
         stage('Retrieving Artifacts'){
-            copyArtifacts fingerprintArtifacts:true, projectName:'Pi_Client_SCM', filter:'target/*.jar'
-            copyArtifacts fingerprintArtifacts:true, projectName:'Pi_Server_SCM', filter:'target/*.jar'
+            steps{
+                copyArtifacts fingerprintArtifacts:true, projectName:'Pi_Client_SCM', filter:'target/*.jar'
+                copyArtifacts fingerprintArtifacts:true, projectName:'Pi_Server_SCM', filter:'target/*.jar'
 
 
-            copyArtifacts fingerprintArtifacts:true, projectName:'Pi_Server_SCM', filter:'*.xml'
-            copyArtifacts fingerprintArtifacts:true, projectName:'Pi_Client_SCM', filter:'*.xml'
+                copyArtifacts fingerprintArtifacts:true, projectName:'Pi_Server_SCM', filter:'*.xml'
+                copyArtifacts fingerprintArtifacts:true, projectName:'Pi_Client_SCM', filter:'*.xml'
 
-            junit  testResults:'**/target/surefire-reports/TEST-*.xml', allowEmptyResults:true
+                junit  testResults:'**/target/surefire-reports/TEST-*.xml', allowEmptyResults:true
+            }
         }
 
         stage('Executions'){
