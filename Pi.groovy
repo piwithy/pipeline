@@ -21,12 +21,6 @@ pipeline{
             steps{
                 copyArtifacts fingerprintArtifacts:true, projectName:'Pi_Client_SCM', filter:'target/*.jar'
                 copyArtifacts fingerprintArtifacts:true, projectName:'Pi_Server_SCM', filter:'target/*.jar'
-
-
-                copyArtifacts fingerprintArtifacts:true, projectName:'Pi_Server_SCM', filter:'*.xml'
-                copyArtifacts fingerprintArtifacts:true, projectName:'Pi_Client_SCM', filter:'*.xml'
-
-                junit  testResults:'**/target/surefire-reports/TEST-*.xml', allowEmptyResults:true
             }
         }
 
@@ -50,7 +44,7 @@ pipeline{
         stage('Arch: Archiving Artifacts'){
             steps{
                 archiveArtifacts artifacts:'**/target/Pi*-*.jar', fingerprint:true
-                
+
             }
         }
     }
