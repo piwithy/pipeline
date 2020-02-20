@@ -9,11 +9,15 @@ pipeline{
         }
 
         stage('Build: Building Pi Client'){
-            sh 'mvn clean package'
+            steps{
+                sh 'mvn clean package'
+            }
         }
 
         stage('Arch: Archiving Artifacts'){
-            archiveArtifacts artifacts:'**/target/PiClient-*.jar', fingerprint:true
+            steps{
+                archiveArtifacts artifacts:'**/target/PiClient-*.jar', fingerprint:true
+            }
         }
     }
 

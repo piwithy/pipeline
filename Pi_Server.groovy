@@ -9,11 +9,15 @@ pipeline{
         }
 
         stage('Build: Building Pi Server'){
-            sh 'mvn clean package'
+            steps{
+                sh 'mvn clean package'
+            }
         }
 
         stage('Arch: Archiving Artifacts'){
-            archiveArtifacts artifacts:'**/target/PiServer-*.jar', fingerprint:true
+            steps{
+                archiveArtifacts artifacts:'**/target/PiServer-*.jar', fingerprint:true
+            }
         }
     }
 
