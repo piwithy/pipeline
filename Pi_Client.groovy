@@ -1,0 +1,29 @@
+pipeline{
+    agent any
+
+    stages{
+        stage('Prep: Retrieving Sources'){
+            steps{
+                git branch:'master', credentialsId:'e0cb256b-a73f-4d4c-9ea4-06eaef20da82', url:'https://piwithy@bitbucket.org/pi_client/client.git'
+            }
+        }
+
+        stage('Build: Building Pi Client'){
+            sh 'mvn clean package'
+        }
+
+        stage('Arch: Archiving Artifacts'){
+            archiveArtifacts artifacts:'**/target/PiClient-*.jar', fingerprint:true
+        }
+    }
+
+    post{
+        always{
+            junit  testResults:'**/target/surefire-reports/TEST-*.xml', allowEmptyResults:true
+        }
+
+        cleanup{
+            cleanWs()
+        }
+    }
+}
