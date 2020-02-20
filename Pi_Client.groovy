@@ -24,7 +24,7 @@ pipeline{
     post{
         always{
             junit  testResults:'**/target/surefire-reports/TEST-*.xml', allowEmptyResults:true
-            archiveArtifacts artifacts:'**/target/surefire-reports/TEST-*.xml', fingerprint:true, allowEmptyResults:true
+            archiveArtifacts artifacts:'**/target/surefire-reports/TEST-*.xml', fingerprint:true, allowEmptyArchive:true
         }
 
         cleanup{
