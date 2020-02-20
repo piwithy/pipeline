@@ -35,7 +35,7 @@ pipeline{
 
                 stage('Server'){
                     steps{
-                        sh 'java -jar target/PiClient-*.jar'
+                        sh 'java -jar target/PiServer-*.jar'
                     }
                 }
             }
