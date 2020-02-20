@@ -50,6 +50,7 @@ pipeline{
         stage('Arch: Archiving Artifacts'){
             steps{
                 archiveArtifacts artifacts:'**/target/Pi*-*.jar', fingerprint:true
+                
             }
         }
     }
