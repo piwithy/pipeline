@@ -5,13 +5,13 @@ pipeline{
             parallel{
                 stage('Client'){
                     steps{
-                        build job:'Pi_Client_SCM'
+                        build job:'Client'
                     }
                 }
 
                 stage('Server'){
                     steps{
-                        build job:'Pi_Server_SCM'
+                        build job:'Server'
                     }
                 }
             }
@@ -19,8 +19,8 @@ pipeline{
 
         stage('Retrieving Artifacts'){
             steps{
-                copyArtifacts fingerprintArtifacts:true, projectName:'Pi_Client_SCM', filter:'target/*.jar'
-                copyArtifacts fingerprintArtifacts:true, projectName:'Pi_Server_SCM', filter:'target/*.jar'
+                copyArtifacts fingerprintArtifacts:true, projectName:'Client', filter:'target/*.jar'
+                copyArtifacts fingerprintArtifacts:true, projectName:'Server', filter:'target/*.jar'
             }
         }
 
